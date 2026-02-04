@@ -29,10 +29,8 @@ jobs:
           sdkmanager --update
           sdkmanager \
             "platform-tools" \
-            "platforms;android-36" \
-            "build-tools;latest" \
-            "ndk;29.0.14206865" \
-            "cmake;3.22.1"
+            "platforms;android-34" \
+            "build-tools;34.0.0"
 
       - name: Set up Java 17
         uses: actions/setup-java@v4

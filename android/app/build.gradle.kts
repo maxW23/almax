@@ -14,9 +14,7 @@ plugins {
 val isDebugBuild = gradle.startParameter.taskNames.any { it.contains("Debug") }
 android {
   namespace = "com.bwmatbw.lklklivechatapp"
-  compileSdk = 36
-  // ndkVersion = "27.0.12077973"
-  ndkVersion = "29.0.14206865"
+  compileSdk = 34
   compileOptions {
     isCoreLibraryDesugaringEnabled = true
     sourceCompatibility = JavaVersion.VERSION_17
@@ -27,7 +25,7 @@ android {
   defaultConfig {
     applicationId = "com.bwmatbw.lklklivechatapp"
     minSdk = flutter.minSdkVersion
-    targetSdk = 36
+    targetSdk = 34
     versionCode = flutter.versionCode
     versionName = flutter.versionName
     multiDexEnabled = true
