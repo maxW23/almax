@@ -34,53 +34,6 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Android build (AAB)
-        run: |
-          flutter build appbundle --release \
-            --dart-define=ENV=ci \
-            --obfuscate \
-            --split-debug-info=build/symbols \
-            --tree-shake-icons
-      
-      - name: Rename AAB to almax-release.aab
-        run: |
-          mv build/app/outputs/bundle/release/*.aab build/app/outputs/bundle/release/almax-release.aab
-
-      - name: Archive Android artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-aab
-          path: build/app/outputs/bundle/release/almax-release.aab
-      
-      - name: Android build (APK Debug DEV)
-        run: |
-          flutter build apk --debug --flavor dev \
-            --dart-define=ENV=ci
-      
-      - name: Archive Android APK (Debug DEV)
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk-debug-dev
-          path: build/app/outputs/apk/dev/debug/almax-dev-debug.apk
-      
-      - name: Android build (APK Release STAGING)
-        run: |
-          flutter build apk --release --flavor staging \
-            --dart-define=ENV=ci \
-            --obfuscate \
-            --split-debug-info=build/symbols \
-            --tree-shake-icons
-      
-      - name: Rename STAGING APK to almax-staging-release.apk
-        run: |
-          mv build/app/outputs/apk/staging/release/*.apk build/app/outputs/apk/staging/release/almax-staging-release.apk
-      
-      - name: Archive Android APK (Release STAGING)
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk-release-staging
-          path: build/app/outputs/apk/staging/release/almax-staging-release.apk
-      
       - name: Android build (APK Release PROD)
         run: |
           flutter build apk --release --flavor prod \
@@ -89,15 +42,15 @@ jobs:
             --split-debug-info=build/symbols \
             --tree-shake-icons
       
-      - name: Rename PROD APK to almax-prod-release.apk
+      - name: Rename APK to almax.apk
         run: |
-          mv build/app/outputs/apk/prod/release/*.apk build/app/outputs/apk/prod/release/almax-prod-release.apk
+          mv build/app/outputs/apk/prod/release/*.apk build/app/outputs/apk/prod/release/almax.apk
       
-      - name: Archive Android APK (Release PROD)
+      - name: Archive Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: android-apk-release-prod
-          path: build/app/outputs/apk/prod/release/almax-prod-release.apk
+          name: almax-apk
+          path: build/app/outputs/apk/prod/release/almax.apk
       
       - name: Publish GitHub Release with APKs
         uses: ncipollo/release-action@v1
@@ -106,9 +59,7 @@ jobs:
           name: almax APK build ${{ github.run_number }}
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: |
-            build/app/outputs/apk/dev/debug/almax-dev-debug.apk
-            build/app/outputs/apk/staging/release/almax-staging-release.apk
-            build/app/outputs/apk/prod/release/almax-prod-release.apk
+            build/app/outputs/apk/prod/release/almax.apk
           allowUpdates: true
           draft: false
           prerelease: false
