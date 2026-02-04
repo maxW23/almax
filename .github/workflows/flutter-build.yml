@@ -74,6 +74,20 @@ jobs:
         with:
           name: android-apk-release-prod
           path: build/app/outputs/apk/prod/release/*.apk
+      
+      - name: Publish GitHub Release with APKs
+        uses: ncipollo/release-action@v1
+        with:
+          tag: build-${{ github.run_number }}
+          name: APK build ${{ github.run_number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: |
+            build/app/outputs/apk/dev/debug/*.apk
+            build/app/outputs/apk/staging/release/*.apk
+            build/app/outputs/apk/prod/release/*.apk
+          allowUpdates: true
+          draft: false
+          prerelease: false
 
       - name: iOS build (no codesign)
         run: |
