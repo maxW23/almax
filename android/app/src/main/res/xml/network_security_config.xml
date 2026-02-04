@@ -1,0 +1,14 @@
+<network-security-config>
+    <!-- السماح بـ cleartext traffic للنطاقات المحددة -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">api.lklklive.com</domain>
+        <domain includeSubdomains="true">lklklive.com</domain>
+    </domain-config>
+    
+    <!-- السماح بالاتصال بخوادم DNS للتحقق من الإنترنت -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system"/>
+        </trust-anchors>
+    </base-config>
+</network-security-config>

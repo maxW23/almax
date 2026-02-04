@@ -1,0 +1,20 @@
+{
+  "ar": [
+    "selectCountry",
+    "selectAll",
+    "unselectAll",
+    "deleteAll",
+    "deleteSelected",
+    "deviceSongsTitle",
+    "addSelected",
+    "permissionAudioAndroid",
+    "permissionAudioIOS",
+    "deviceReadError",
+    "exiting",
+    "valueMustBeNumber",
+    "hold",
+    "moneyBagTransferMessage",
+    "moneyBagTransferTitle",
+    "ranking"
+  ]
+}

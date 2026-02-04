@@ -1,0 +1,25 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build Android App Bundle (.aab) for a flavor"
+  lane :build_aab do |options|
+    flavor = (options[:flavor] || 'prod')
+    sh "flutter pub get"
+    sh "flutter build appbundle --release --flavor #{flavor} --dart-define=ENV=#{flavor} --obfuscate --split-debug-info=build/symbols --tree-shake-icons"
+  end
+
+  desc "Upload .aab to Google Play (requires service account JSON)"
+  lane :upload_play do |options|
+    track = (options[:track] || 'internal')
+    aab_path = Dir["../build/app/outputs/bundle/**/app-*.aab"].sort.last
+    UI.user_error!("No AAB found. Run build_aab first.") unless aab_path
+
+    supply(
+      aab: aab_path,
+      track: track,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      skip_upload_metadata: true
+    )
+  end
+end

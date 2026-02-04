@@ -1,0 +1,30 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build iOS app (archive) without signing via Flutter"
+  lane :build_ios do |options|
+    env = (options[:env] || 'prod')
+    sh "flutter pub get"
+    sh "flutter build ios --release --no-codesign --dart-define=ENV=#{env} --obfuscate --split-debug-info=build/symbols --tree-shake-icons"
+  end
+
+  desc "Upload to TestFlight (requires App Store Connect API key)"
+  lane :upload_testflight do |options|
+    # gym builds an archive; since we already have a Flutter build, point to workspace
+    scheme = (options[:scheme] || 'Runner')
+    configuration = (options[:configuration] || 'Release')
+
+    gym(
+      workspace: "Runner.xcworkspace",
+      scheme: scheme,
+      configuration: configuration,
+      export_method: "app-store",
+      clean: true
+    )
+
+    pilot(
+      skip_submission: true,
+      distribute_external: false
+    )
+  end
+end

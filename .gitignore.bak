@@ -1,0 +1,75 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Environment files
+# .env
+# .env.local
+
+# Node artifacts for MCP helper
+/mcp-figma/node_modules/
+/mcp-figma/package-lock.json
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio build artifacts
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/app/build
+# /packages/
+ 
+# Android build directory
+/android/build/
+
+ 
+# Keystore files (DO NOT COMMIT)
+
+# android/keystores/*.jks
+# android/key.properties
+
+# SVGA Files
+svga_files/**
+
+# Assets (ignore all assets from being committed)
+# /assets/**
+
+# Ignore all .svga files anywhere
+# *.svga
+# **/*.svga
+!svga_files/.gitkeep
+ios/Pods/
+macos/Pods/

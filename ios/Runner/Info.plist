@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- الإعدادات الأساسية للتطبيق -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Lklk</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>lklk</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+
+    <!-- إعدادات الشاشة والتوجيه -->
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <!-- أذونات الخلفية (مهم للإشعارات والمكالمات) -->
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>audio</string>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+
+    <!-- وصف أذونات الخصوصية (مطلوبة بواسطة نظام iOS) -->
+    <key>NSCameraUsageDescription</key>
+    <string>يستخدم التطبيق الكاميرا للتصوير ومكالمات الفيديو</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>يستخدم التطبيق الميكروفون للتسجيل والمكالمات الصوتية</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>يستخدم التطبيق المكتبة الصور لاختيار الصور</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>يستخدم التطبيق المكتبة الصور لحفظ الصور</string>
+    <!-- إذن مكتبة الموسيقى للوصول إلى أغاني الجهاز -->
+    <key>NSAppleMusicUsageDescription</key>
+    <string>يحتاج التطبيق للوصول إلى مكتبة الموسيقى لعرض وتشغيل الأغاني المحلية</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>يستخدم التطبيق الموقع لتوفير تجربة مخصصة</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>يستخدم التطبيق الموقع حتى عند الإغلاق للتحديثات</string>
+    <key>NSMotionUsageDescription</key>
+    <string>يستخدم التطبيق الحركة لتحليل النشاط</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>يستخدم هذا المعرف لتوصيل إعلانات مخصصة لك</string>
+
+    <!-- إعدادات أمان الشبكة (مهم للاتصال بالخوادم) -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>lklklive.com</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+
+    <!-- إعدادات الإشعارات (مطلوبة لـ flutter_local_notifications) -->
+    <key>UNNotificationUsageDescription</key>
+    <string>لتلقي الإشعارات والتحديثات</string>
+
+    <!-- إعدادات لـ WebView (إذا كان مستخدمًا) -->
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
+
+    <!-- إعدادات لـ Bonjour للتصحيح (مهم أثناء التطوير) -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>يسمح للتطبيق والخدمات المرتبطة به بالاتصال بالشبكة المحلية للتصحيح</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dartobservatory._tcp</string>
+    </array>
+
+    <!-- إعدادات لـ Google Sign-In (إذا كان مستخدمًا) -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.Your-Client-ID</string>
+            </array>
+        </dict>
+    </array>
+
+    
+
+    <!-- إعدادات لـ url_launcher (لفتح الروابط) -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>https</string>
+        <string>http</string>
+        <string>tel</string>
+        <string>sms</string>
+        <string>mailto</string>
+    </array>
+
+    <!-- إعدادات Google AdMob (مهم لتجنب التعطل) -->
+    <key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-3966750631612930~3493710840</string>
+    
+    <key>SKAdNetworkItems</key>
+    <array>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cstr6suwn9.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>4fzdc2evr5.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>4pfyvq9l8r.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>2fnua5tdw4.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>ydx93a7ass.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>5a6flpkh64.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>p78axxw29g.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>v72qych5uu.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>ludvb6z3bs.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>cp8zw746q7.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>3sh42y64q3.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>c6k4g5qg8m.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>s39g8k73mm.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>3qy4746246.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>f38h382jlk.skadnetwork</string>
+        </dict>
+        <dict>
+            <key>SKAdNetworkIdentifier</key>
+            <string>hs6bdukanm.skadnetwork</string>
+        </dict>
+    </array>
+</dict>
+</plist>

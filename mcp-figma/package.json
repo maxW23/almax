@@ -1,0 +1,14 @@
+{
+  "name": "mcp-figma",
+  "private": true,
+  "version": "1.0.0",
+  "description": "سكربت بسيط لتشغيل خادم MCP الرسمي لـ Figma داخل Windsurf (stdio)",
+  "scripts": {
+    "start": "node server.js",
+    "mcp:figma": "node server.js",
+    "mcp:figma:stdio": "npx -y @modelcontextprotocol/server-figma"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6673_19293)">
+<foreignObject x="-4" y="-4" width="38" height="38"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(2px);clip-path:url(#bgblur_1_6673_19293_clip_path);height:100%;width:100%"></div></foreignObject><circle data-figma-bg-blur-radius="4" cx="15" cy="15" r="14.95" fill="#161B2E" fill-opacity="0.5" stroke="black" stroke-width="0.1"/>
+<path d="M25 15L21 11V14H13V16H21V19M23 21C21.7407 22.6791 19.985 23.9193 17.9817 24.5451C15.9783 25.1709 13.8288 25.1505 11.8377 24.4868C9.8466 23.8231 8.11478 22.5498 6.88758 20.8471C5.66037 19.1444 5 17.0988 5 15C5 12.9012 5.66037 10.8556 6.88758 9.1529C8.11478 7.45024 9.8466 6.17687 11.8377 5.51317C13.8288 4.84946 15.9783 4.82906 17.9817 5.45486C19.985 6.08067 21.7407 7.32094 23 9H20.27C19.1153 7.98166 17.6913 7.31814 16.1689 7.08906C14.6464 6.85997 13.0902 7.07506 11.687 7.7085C10.2838 8.34194 9.09312 9.36683 8.25793 10.6602C7.42274 11.9535 6.9785 13.4604 6.9785 15C6.9785 16.5396 7.42274 18.0465 8.25793 19.3398C9.09312 20.6332 10.2838 21.6581 11.687 22.2915C13.0902 22.9249 14.6464 23.14 16.1689 22.9109C17.6913 22.6819 19.1153 22.0183 20.27 21H23Z" fill="white"/>
+</g>
+<defs>
+<clipPath id="bgblur_1_6673_19293_clip_path" transform="translate(4 4)"><circle cx="15" cy="15" r="14.95"/>
+</clipPath><clipPath id="clip0_6673_19293">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

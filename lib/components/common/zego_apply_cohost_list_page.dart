@@ -1,0 +1,163 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
+import '../../zego_sdk_manager.dart';
+
+class RoomRequestListView {
+  static Future<void> showBasicModalBottomSheet(context) async {
+    final zimService = ZEGOSDKManager().zimService;
+    showModalBottomSheet(
+      barrierColor: Colors.transparent,
+      isScrollControlled: false,
+      context: context,
+      builder: (BuildContext context) {
+        return ValueListenableBuilder(
+          valueListenable: zimService.roomRequestMapNoti,
+          builder: (context, Map<String, RoomRequest> requestMap, _) {
+            final requestList = requestMap.values.toList();
+
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 5),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    AutoSizeText('Request List:',
+                        style: Theme.of(context).textTheme.titleMedium)
+                  ]),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (_, __) => const Divider(),
+                      itemCount: requestMap.values.toList().length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final roomRequest = requestList[index];
+                        final itemUserInfo =
+                            ZEGOSDKManager().getUser(roomRequest.senderID);
+                        final child = Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Expanded(child: SizedBox()),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStateProperty.all<Color>(
+                                          Colors.lightGreen)),
+                              onPressed: () {
+                                final navigator = Navigator.of(context);
+                                final messenger = ScaffoldMessenger.of(context);
+                                zimService
+                                    .acceptRoomRequest(
+                                        roomRequest.requestID ?? '')
+                                    .then((value) {
+                                  navigator.pop();
+                                }).catchError((error) {
+                                  messenger.showSnackBar(SnackBar(
+                                      content: AutoSizeText(
+                                    'Agree failed: $error .',
+                                    textAlign: TextAlign.center,
+                                  )));
+                                });
+                              },
+                              child: const Icon(Icons.check_outlined),
+                            ),
+                            const SizedBox(width: 10),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                  backgroundColor:
+                                      WidgetStateProperty.all<Color>(
+                                          const Color(0xFFFF0000))),
+                              onPressed: () {
+                                final navigator = Navigator.of(context);
+                                final messenger = ScaffoldMessenger.of(context);
+                                zimService
+                                    .rejectRoomRequest(
+                                        roomRequest.requestID ?? '')
+                                    .then((value) {
+                                  navigator.pop();
+                                }).catchError((error) {
+                                  messenger.showSnackBar(SnackBar(
+                                      content: AutoSizeText(
+                                          'DisAgree failed: $error .')));
+                                });
+                              },
+                              child: const Icon(Icons.close_outlined),
+                            ),
+                          ],
+                        );
+
+                        return itemUserInfo == null
+                            ? Row(mainAxisSize: MainAxisSize.min, children: [
+                                Expanded(
+                                  child: Row(children: [
+                                    const SizedBox(width: 8),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AutoSizeText(
+                                            'ID: ${roomRequest.senderID}'),
+                                      ],
+                                    )
+                                  ]),
+                                ),
+                                Expanded(child: child)
+                              ])
+                            : ValueListenableBuilder(
+                                valueListenable: itemUserInfo.avatarUrlNotifier,
+                                builder: (BuildContext context,
+                                    String? avatarUrl, Widget? child) {
+                                  final avatar = avatarUrl?.isNotEmpty ?? false
+                                      ? CachedNetworkImage(
+                                          width: 50,
+                                          height: 50,
+                                          imageUrl: avatarUrl!,
+                                          fit: BoxFit.cover,
+                                          progressIndicatorBuilder: (context,
+                                                  url, _) =>
+                                              const CupertinoActivityIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              const SizedBox.shrink(),
+                                        )
+                                      : const SizedBox.shrink();
+                                  return Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Expanded(
+                                          child: Row(children: [
+                                            avatar,
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                AutoSizeText(itemUserInfo.name!,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.fade),
+                                                AutoSizeText(
+                                                    'ID: ${roomRequest.senderID}'),
+                                              ],
+                                            )
+                                          ]),
+                                        ),
+                                        Expanded(child: child!)
+                                      ]);
+                                },
+                                child: child,
+                              );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+}

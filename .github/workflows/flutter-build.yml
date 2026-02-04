@@ -1,0 +1,90 @@
+name: Flutter Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Android build (AAB)
+        run: |
+          flutter build appbundle --release \
+            --dart-define=ENV=ci \
+            --obfuscate \
+            --split-debug-info=build/symbols \
+            --tree-shake-icons
+
+      - name: Archive Android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: build/app/outputs/bundle/release/*.aab
+      
+      - name: Android build (APK Debug DEV)
+        run: |
+          flutter build apk --debug --flavor dev \
+            --dart-define=ENV=ci
+      
+      - name: Archive Android APK (Debug DEV)
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk-debug-dev
+          path: build/app/outputs/apk/dev/debug/*.apk
+      
+      - name: Android build (APK Release STAGING)
+        run: |
+          flutter build apk --release --flavor staging \
+            --dart-define=ENV=ci \
+            --obfuscate \
+            --split-debug-info=build/symbols \
+            --tree-shake-icons
+      
+      - name: Archive Android APK (Release STAGING)
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk-release-staging
+          path: build/app/outputs/apk/staging/release/*.apk
+      
+      - name: Android build (APK Release PROD)
+        run: |
+          flutter build apk --release --flavor prod \
+            --dart-define=ENV=ci \
+            --obfuscate \
+            --split-debug-info=build/symbols \
+            --tree-shake-icons
+      
+      - name: Archive Android APK (Release PROD)
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk-release-prod
+          path: build/app/outputs/apk/prod/release/*.apk
+
+      - name: iOS build (no codesign)
+        run: |
+          flutter build ios --release --no-codesign \
+            --dart-define=ENV=ci \
+            --obfuscate \
+            --split-debug-info=build/symbols \
+            --tree-shake-icons
+
+      - name: Archive iOS build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: build/ios/iphoneos/*.app

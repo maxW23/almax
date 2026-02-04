@@ -1,0 +1,15 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml:1:1-2:12
+INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml:1:1-2:12
+	package
+		ADDED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml:1:11-54
+		INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml
+uses-sdk
+INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml
+INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/abo_alhuda/Documents/flutter_projects_abo_alhuda/new_work/lklk/packages/webview_flutter_android/android/src/main/AndroidManifest.xml
