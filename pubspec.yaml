@@ -101,7 +101,7 @@ dependencies:
   in_app_purchase: ^3.1.13
   on_audio_query: ^2.9.0
   web_socket_channel: ^3.0.3
-  vm_service: ^14.2.4
+  vm_service: ^15.0.0
   livekit_client: ^2.5.3
 
 dev_dependencies:
