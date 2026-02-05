@@ -48,8 +48,6 @@ android {
         keyPassword = "mat18mat"
         storeFile = ks
         storePassword = "mat18mat"
-      } else {
-        signingConfig = signingConfigs.getByName("debug")
       }
     }
   }
@@ -86,7 +84,12 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
     getByName("release") {
-      signingConfig = signingConfigs.getByName("release")
+      val ks = file("adib.jks")
+      signingConfig = if (ks.exists()) {
+        signingConfigs.getByName("release")
+      } else {
+        signingConfigs.getByName("debug")
+      }
       isMinifyEnabled = true
       isShrinkResources = true
       proguardFiles(

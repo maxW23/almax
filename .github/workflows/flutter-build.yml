@@ -73,7 +73,7 @@ jobs:
 
       - name: Android build (APK Release PROD)
         run: |
-          flutter build apk --release --flavor prod \
+          flutter build apk -v --release --flavor prod \
             --dart-define=ENV=ci \
             --obfuscate \
             --split-debug-info=build/symbols \
