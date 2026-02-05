@@ -51,8 +51,13 @@ jobs:
           flutter clean
           flutter pub get
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x android/gradlew
+      - name: Grant execute permission for gradlew if present
+        run: |
+          if [ -f "android/gradlew" ]; then
+            chmod +x android/gradlew
+          else
+            echo "android/gradlew not found; skipping chmod."
+          fi
 
       - name: Generate android/local.properties for CI
         run: |
