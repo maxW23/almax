@@ -1,6 +1,7 @@
 name: Flutter Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, master ]
   pull_request:
@@ -46,7 +47,12 @@ jobs:
         run: flutter doctor -v
 
       - name: Flutter pub get
-        run: flutter pub get
+        run: |
+          flutter clean
+          flutter pub get
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x android/gradlew
 
       - name: Generate android/local.properties for CI
         run: |
@@ -58,14 +64,19 @@ jobs:
       - name: Android build (APK Release PROD)
         run: |
           flutter build apk -v --release --flavor prod \
-            --dart-define=ENV=ci \
-            --obfuscate \
-            --split-debug-info=build/symbols \
-            --tree-shake-icons
+            --dart-define=ENV=ci
 
       - name: Rename APK to almax.apk
         run: |
-          mv build/app/outputs/apk/prod/release/*.apk build/app/outputs/apk/prod/release/almax.apk
+          echo "Listing build directory..."
+          ls -R build/app/outputs/apk/
+          APK_PATH=$(find build/app/outputs/apk/prod/release -name "*.apk" -type f | head -n 1)
+          if [ -z "$APK_PATH" ]; then
+            echo "No APK found in build/app/outputs/apk/prod/release/"
+            exit 1
+          fi
+          echo "Found APK at $APK_PATH"
+          mv "$APK_PATH" build/app/outputs/apk/prod/release/almax.apk
 
       - name: Archive Android APK
         uses: actions/upload-artifact@v4
