@@ -61,9 +61,16 @@ jobs:
           echo "flutter.sdk=$FLUTTER_SDK" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK" >> android/local.properties
 
+      - name: Generate android/key.properties
+        run: |
+          echo "storePassword=android" > android/key.properties
+          echo "keyPassword=android" >> android/key.properties
+          echo "keyAlias=androiddebugkey" >> android/key.properties
+          echo "storeFile=debug.keystore" >> android/key.properties
+
       - name: Android build (APK Release PROD)
         run: |
-          flutter build apk -v --release --flavor prod \
+          flutter build apk -v --release --flavor prod --no-shrink \
             --dart-define=ENV=ci
 
       - name: Rename APK to almax.apk

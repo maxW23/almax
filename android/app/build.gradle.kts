@@ -76,6 +76,7 @@ android {
       // No suffixes for production
       resValue("string", "app_name", "Lklk")
       // Prod will use buildType signing (debug keystore for debug, release keystore for release)
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
 
