@@ -32,10 +32,13 @@ jobs:
             "cmdline-tools;latest" \
             "platforms;android-33" \
             "build-tools;33.0.2"
-          echo "::add-path::${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin"
       
-      - name: Flutter doctor
-        run: flutter doctor -v
+      - name: Configure Android SDK paths
+        shell: bash
+        run: |
+          export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+          flutter config --android-sdk "$ANDROID_SDK_ROOT"
+          flutter doctor -v
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
