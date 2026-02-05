@@ -67,6 +67,12 @@ jobs:
           flutter precache --android
           flutter config --android-sdk "$ANDROID_SDK_ROOT"
           flutter doctor -v
+      
+      - name: Rewrite local.properties for CI
+        shell: bash
+        run: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/local.properties
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > android/app/local.properties
 
       - name: Flutter pub get
         run: flutter pub get
