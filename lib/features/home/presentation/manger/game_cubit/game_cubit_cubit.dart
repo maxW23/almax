@@ -13,19 +13,9 @@ class GameCubitCubit extends Cubit<GameCubitState> {
 
   Future<GameListBaen?> getGameList(int roomId) async {
     try {
-      final String? token = await AuthService.getTokenFromSharedPreferences();
-
-      if (token == null) {
-        return null;
-      }
-
+      // Prefer test server game list for verification before production
       final response = await dio.get(
-        'https://lklklive.com/api/game/getGameList?room_id=$roomId',
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $token',
-          },
-        ),
+        'https://gztest.leadercc.com/lklklive_games/test_game_list.json',
       );
 
       if (response.statusCode == 200) {

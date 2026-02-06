@@ -62,25 +62,7 @@ void showGameList(
                         child: Center(
                           child: Column(
                             children: [
-                              ImageLoader(
-                                imageUrl: games[index].icon!,
-                                width: 50,
-                                height: 50,
-                                fit: BoxFit.cover,
-                                placeholderColor: Colors.grey.shade300,
-                                fallbackWidget: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.grey,
-                                  ),
-                                  child: const Icon(
-                                    Icons.error,
-                                    color: const Color(0xFFFF0000),
-                                    size: 30,
-                                  ),
-                                ),
-                              ),
+                              _GameIcon(imagePath: games[index].icon ?? '', size: 50),
                               AutoSizeText(
                                 games[index].name ?? '',
                                 maxLines: 1,
@@ -98,4 +80,46 @@ void showGameList(
       );
     },
   );
+}
+
+class _GameIcon extends StatelessWidget {
+  const _GameIcon({required this.imagePath, required this.size});
+  final String imagePath;
+  final double size;
+
+  bool _isAsset(String path) {
+    // Treat paths starting with assets/ as asset images
+    return path.startsWith('assets/');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isAsset(imagePath)) {
+      return Image.asset(
+        imagePath,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+      );
+    }
+    return ImageLoader(
+      imageUrl: imagePath,
+      width: size,
+      height: size,
+      fit: BoxFit.cover,
+      placeholderColor: Colors.grey.shade300,
+      fallbackWidget: Container(
+        width: size,
+        height: size,
+        decoration: const BoxDecoration(
+          color: Colors.grey,
+        ),
+        child: const Icon(
+          Icons.error,
+          color: Color(0xFFFF0000),
+          size: 30,
+        ),
+      ),
+    );
+  }
 }
