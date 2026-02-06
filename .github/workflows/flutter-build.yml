@@ -38,7 +38,7 @@ jobs:
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
-        with:
+          with:
           flutter-version: '3.38.9'
           channel: 'stable'
           cache: true
@@ -65,6 +65,13 @@ jobs:
           ANDROID_SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
           echo "flutter.sdk=$FLUTTER_SDK" > android/local.properties
           echo "sdk.dir=$ANDROID_SDK" >> android/local.properties
+
+      - name: Ensure Gradle wrapper (best-effort)
+        run: |
+          if [ ! -f "android/gradlew" ]; then
+            echo "Gradle wrapper not found; attempting generation..."
+            (gradle -p android wrapper && chmod +x android/gradlew) || echo "Gradle not available; will let Flutter handle build"
+          fi
 
       - name: Create debug keystore
         run: |
